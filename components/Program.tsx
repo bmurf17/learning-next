@@ -1,5 +1,5 @@
-import Image from "next/image";
 import CustomCard from "./CustomCard";
+import Link from "next/link";
 
 export default function Program() {
   return (
@@ -9,11 +9,13 @@ export default function Program() {
           Take a look at one of our programs
         </p>
         <div className="flex md:flex-row flex-col pt-6 gap-5 flex-wrap">
-          <CustomCard
-            image={"/test-image1.jpg"}
-            title={"Sunday Circle"}
-            description={"A Program where we hang on a sunday"}
-          />
+          <Link href={"/program/sunday"}>
+            <CustomCard
+              image={"/test-image1.jpg"}
+              title={"Sunday Circle"}
+              description={"A Program where we hang on a sunday"}
+            />
+          </Link>
         </div>
       </div>
     </div>

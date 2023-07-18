@@ -14,7 +14,7 @@ export default function Hero() {
           Streamline the process of planning events
         </p>
 
-        <Link href={"/program"}>
+        <Link href={"/programs"}>
           <CustomButton
             title="Explore Programs"
             containerStyles="bg-purple-400  hover:bg-purple-500 text-white rounded-full my-10 p-8"
