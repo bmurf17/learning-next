@@ -25,7 +25,7 @@ export default function ProgramDetails({ programName }: Props) {
         </div>
       </div>
       <div className="flex flex-row align-middle justify-center mt-14">
-        Calendar
+        Calendar Or Next Days It Comes Up
       </div>
     </>
   );
