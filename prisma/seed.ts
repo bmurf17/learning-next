@@ -1,5 +1,5 @@
 const { PrismaClient } = require('@prisma/client');
-const prisma = new PrismaClient();
+const prismaSeed = new PrismaClient();
 
 const programs = [
     {
@@ -26,13 +26,13 @@ const programs = [
 
 const load = async () => {
     try {
-        await prisma.program.deleteMany();
+        await prismaSeed.program.deleteMany();
         console.log('Deleted records in program table');
 
-        await prisma.$queryRaw`ALTER TABLE Program AUTO_INCREMENT = 1`;
+        await prismaSeed.$queryRaw`ALTER TABLE Program AUTO_INCREMENT = 1`;
         console.log('reset product auto increment to 1');
 
-        await prisma.program.createMany({
+        await prismaSeed.program.createMany({
             data: programs,
         });
         console.log('Added product data');
@@ -40,7 +40,7 @@ const load = async () => {
         console.error(e);
         process.exit(1);
     } finally {
-        await prisma.$disconnect();
+        await prismaSeed.$disconnect();
     }
 };
 
