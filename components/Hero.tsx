@@ -5,7 +5,7 @@ import Link from "next/link";
 export default function Hero() {
   return (
     <div className="flex md:flex-row flex-col gap-5 z-0 max-w-[1440px] xl:mx-auto mx-2">
-      <div className="flex-1 xl:pt-36 pt-28 sm:px-16 px-6">
+      <div className="flex-1 xl:pt-auto pt-28 sm:px-16 px-6">
         <h1 className="2xl:text-[72px] sm:text-[64px] text-[50px] font-extrabold">
           Plan, Manage, and Program Upcoming events!
         </h1>

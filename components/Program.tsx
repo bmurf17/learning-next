@@ -8,13 +8,13 @@ interface Props {
 
 export default function Program({ programs }: Props) {
   return (
-    <div className="flex md:flex-row flex-col gap-5 z-0 max-w-[1440px] xl:mx-auto mx-2 md:h-screen">
-      <div className="flex-1 xl:pt-36 pt-14 sm:px-16 px-6">
+    <div className="flex md:flex-row flex-col gap-5 z-0 max-w-[1440px] xl:mx-auto mx-2 md:h-screen ">
+      <div className="flex-1 xl:pt-auto pt-14 sm:px-16 px-6">
         <p className="text-[27px] text-black-100 font-light mt-5 md:text-center">
           Take a look at one of our programs
         </p>
-        <div className="flex md:flex-row flex-col pt-6 gap-5 flex-wrap">
-          <Link href={"/program/sunday"}>
+        <div className="container mx-auto p-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+          <Link className="col-span-1 flex flex-col" href={"/program/sunday"}>
             <CustomCard
               image={"/test-image1.jpg"}
               title={"Sunday Circle"}
@@ -24,6 +24,7 @@ export default function Program({ programs }: Props) {
           {programs.map((program) => {
             return (
               <Link
+                className="col-span-1 flex flex-col"
                 key={program.name + program.id}
                 href={`/program/${program.name}`}
               >

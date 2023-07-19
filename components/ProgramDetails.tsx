@@ -6,7 +6,7 @@ export default function ProgramDetails({ programName }: Props) {
   return (
     <>
       <div className="flex md:flex-row flex-col gap-5 z-0 max-w-[1440px] xl:mx-auto mx-2">
-        <div className="flex-1 xl:pt-36 pt-28 sm:px-16 px-6">
+        <div className="flex-1 xl:pt-auto pt-28 sm:px-16 px-6">
           <h1 className="2xl:text-[48px] sm:text-[48px] text-[50px] font-bold text-center">
             {programName}
           </h1>
@@ -15,7 +15,7 @@ export default function ProgramDetails({ programName }: Props) {
             Description of Program
           </p>
         </div>
-        <div className="flex-1 xl:pt-36 pt-28 sm:px-16 px-6">
+        <div className="flex-1 xl:pt-auto pt-28 sm:px-16 px-6">
           <h1 className="2xl:text-[48px] sm:text-[48px] text-[50px] font-bold text-center">
             Template Programs
           </h1>
