@@ -13,4 +13,55 @@ model Program {
     name        String
     description String
     image       String
+    programPlans ProgramPlan[]
+}
+
+model ProgramPlan {
+    id          Int       @id @default(autoincrement())
+    program Program @relation(fields: [programId], references: [id])
+    programId Int
+    date      DateTime
+    isExample Boolean
+    totalMinutes Int
+    groupCount   Int
+    activities   ActivitiesForProgramPlans[]
+
+    @@index([programId])
+}
+
+model Activity {
+    id          Int         @id @default(autoincrement())
+    name        String
+    description String   
+    minutes     Int
+    programPlans ActivitiesForProgramPlans[]
+    supplies    SuppliesForActivities[]
+}
+
+model Supply {
+    id          Int         @id @default(autoincrement())
+    name        String
+    quantity    Int
+    activites   SuppliesForActivities[]
+}
+
+model ActivitiesForProgramPlans {
+    programPlan ProgramPlan @relation(fields: [programPlanId], references: [id])
+    programPlanId Int
+    activity    Activity @relation(fields: [activityId], references: [id])
+    activityId Int
+
+    @@id([activityId, programPlanId])
+    @@index([activityId])
+    @@index([programPlanId])
+}
+
+model SuppliesForActivities {
+    supply  Supply @relation(fields: [supplyId], references: [id])
+    supplyId Int
+    activity    Activity @relation(fields: [activityId], references: [id])
+    activityId Int
+    @@id([activityId, supplyId])
+    @@index([activityId])
+    @@index([supplyId])
 }
