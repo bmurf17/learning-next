@@ -19,7 +19,10 @@ export default function Page({ params }: { params: { programName: string } }) {
 
   return (
     <main className="">
-      <ProgramDetails programName={program?.name || ""} />
+      <ProgramDetails
+        programName={program?.name || ""}
+        programDescription={program?.description || ""}
+      />
     </main>
   );
 }

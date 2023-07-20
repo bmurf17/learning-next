@@ -3,9 +3,13 @@ import Calendar from "./Calendar";
 
 interface Props {
   programName: string;
+  programDescription: string;
 }
 
-export default function ProgramDetails({ programName }: Props) {
+export default function ProgramDetails({
+  programName,
+  programDescription,
+}: Props) {
   return (
     <>
       <div className="xl:pt-auto pt-28 md:mx-28 mx-4">
@@ -19,7 +23,7 @@ export default function ProgramDetails({ programName }: Props) {
             {programName}
           </h1>
           <p className="text-[27px] text-black-100 font-light mt-5 text-center">
-            Description of Program
+            {programDescription}
           </p>
         </div>
         <div className="flex-1 xl:pt-auto  sm:px-16 px-6">
