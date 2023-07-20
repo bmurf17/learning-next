@@ -1,5 +1,5 @@
 import Image from "next/image";
-import CustomButton from "./CustomButtton";
+import CustomButton from "./CustomButton";
 import Link from "next/link";
 
 export default function Hero() {
@@ -28,6 +28,7 @@ export default function Hero() {
             src="/friendship-circle.png"
             alt="hero"
             fill
+            sizes="50vw"
             className="object-contain"
           />
         </div>

@@ -14,13 +14,6 @@ export default function Program({ programs }: Props) {
           Take a look at one of our programs
         </p>
         <div className="container mx-auto p-6 grid grid-cols-1 md:grid-cols-3 gap-4">
-          <Link className="col-span-1 flex flex-col" href={"/program/sunday"}>
-            <CustomCard
-              image={"/test-image1.jpg"}
-              title={"Sunday Circle"}
-              description={"A Program where we hang on a sunday"}
-            />
-          </Link>
           {programs.map((program) => {
             return (
               <Link
