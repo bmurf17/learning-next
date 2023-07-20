@@ -8,7 +8,7 @@ interface Props {
 
 export default function CustomCard({ image, title, description }: Props) {
   return (
-    <div className="max-w-sm rounded overflow-hidden shadow-lg hover:cursor-pointer h-full">
+    <div className="max-w-sm rounded overflow-hidden shadow-lg hover:cursor-pointer h-full transform transition duration-500 hover:scale-110">
       <div className="relative w-full h-40 my-3 object-contain">
         <Image
           src={image}
