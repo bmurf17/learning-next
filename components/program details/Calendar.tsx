@@ -1,28 +1,35 @@
 "use client";
+import { ProgramPlan } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import { CalendarEvent, Schedulely } from "schedulely";
 import "schedulely/dist/index.css";
 
-export default function Calendar() {
+interface Props {
+  programPlans: ProgramPlan[];
+  programName: string;
+}
+
+export default function Calendar({ programPlans, programName }: Props) {
   const router = useRouter();
-  const storyEvents: CalendarEvent[] = [
-    {
+
+  const programs: CalendarEvent[] = programPlans.map((plan) => {
+    return {
       color: "#a855f7",
-      end: "2023-07-19T16:07:22.292Z",
-      id: "f147",
-      start: "2023-07-19T16:07:22.292Z",
-      summary: "Cool Hat",
-    },
-  ];
+      end: plan.date.toISOString(),
+      id: plan.id + "",
+      start: plan.date.toISOString(),
+      summary: programName,
+    };
+  });
 
   return (
-    <div className="flex flex-row align-middle justify-center mt-14 md:m-28 m-4">
+    <div className="flex flex-row align-middle justify-center mt-14 md:mx-28 m-4">
       <Schedulely
-        events={storyEvents}
+        events={programs}
         additionalClassNames={["w-full"]}
         actions={{
           onEventClick: (event) => router.push("/"),
-          onMoreEventsClick: (events) => router.push("/"),
+          //onMoreEventsClick: (events) => router.push("/"),
         }}
       />
     </div>

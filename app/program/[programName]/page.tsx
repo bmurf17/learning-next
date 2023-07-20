@@ -9,6 +9,9 @@ async function getProgramByName(programName: string) {
       where: {
         name: query,
       },
+      include: {
+        programPlans: true,
+      },
     });
   }
   return null;
@@ -16,12 +19,12 @@ async function getProgramByName(programName: string) {
 
 export default function Page({ params }: { params: { programName: string } }) {
   const program = use(getProgramByName(params.programName));
-
   return (
     <main className="">
       <ProgramDetails
         programName={program?.name || ""}
         programDescription={program?.description || ""}
+        programPlans={program?.programPlans || []}
       />
     </main>
   );
