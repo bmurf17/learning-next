@@ -1,13 +1,17 @@
 import { ProgramDetails } from "@/components";
 import { use } from "react";
+import { prisma } from "../../../lib/prisma";
 
 async function getProgramByName(programName: string) {
   var query = programName.replace("%20", " ");
-  return await prisma?.program.findFirst({
-    where: {
-      name: query,
-    },
-  });
+  if (prisma) {
+    return await prisma?.program.findFirst({
+      where: {
+        name: query,
+      },
+    });
+  }
+  return null;
 }
 
 export default function Page({ params }: { params: { programName: string } }) {
