@@ -1,6 +1,6 @@
 import CustomCard from "./CustomCard";
 import Link from "next/link";
-import { Program as ProgramType } from "@/models/program";
+import { Program as ProgramType } from "@prisma/client";
 
 interface Props {
   programs: ProgramType[];
