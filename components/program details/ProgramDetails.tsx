@@ -46,7 +46,7 @@ export default function ProgramDetails({
                     This is where a program plan display will go
                   </div>;
                 }
-                return <></>;
+                return <div key={plan.id}></div>;
               })}
             </div>
           </div>

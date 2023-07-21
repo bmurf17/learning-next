@@ -6,15 +6,15 @@ export async function GET(Request: any) {
 
 export async function POST(req: Request) {
     const requestData = await req.json();
-    const { name } = requestData
-    console.log(name)
+    console.log(requestData)
+    const { programName, date, totalMinutes, groupCount } = requestData
 
     await prisma?.programPlan.create({
         data: {
-            date: new Date().toISOString(),
+            date: new Date(date).toISOString(),
             isExample: false,
-            groupCount: 5,
-            totalMinutes: 65,
+            groupCount: groupCount,
+            totalMinutes: totalMinutes,
             activities: {
                 create: {
                     activityId: 1

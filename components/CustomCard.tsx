@@ -15,7 +15,9 @@ export default function CustomCard({ image, title, description }: Props) {
           alt={`picture of ${image}`}
           fill={true}
           sizes="50vw"
-          priority={true}
+          // priority={true}
+          placeholder="blur"
+          blurDataURL={"/img/logo.png"}
           className="object-cover"
         />
       </div>
