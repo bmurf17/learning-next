@@ -3,9 +3,10 @@
 import { Activity } from "@prisma/client";
 import CustomTextField from "../CustomTextField";
 import ActivitiesPanel from "./ActivitiesPanel";
+import { ActivitiesWithSupplies } from "@/lib/prisma";
 
 interface Props {
-  availableActivities: Activity[];
+  availableActivities: ActivitiesWithSupplies[];
 }
 
 export default function ProgramPlanForm({ availableActivities }: Props) {
