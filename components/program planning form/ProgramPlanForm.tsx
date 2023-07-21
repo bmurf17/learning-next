@@ -1,8 +1,14 @@
 "use client";
 
+import { Activity } from "@prisma/client";
 import CustomTextField from "../CustomTextField";
+import ActivitiesPanel from "./ActivitiesPanel";
 
-export default function ProgramPlanForm() {
+interface Props {
+  availableActivities: Activity[];
+}
+
+export default function ProgramPlanForm({ availableActivities }: Props) {
   async function handleSubmit(event: any) {
     event.preventDefault();
 
@@ -27,10 +33,26 @@ export default function ProgramPlanForm() {
       console.log("Sad");
     }
   }
+
+  const includedActivities: Activity[] = [
+    {
+      id: 0,
+      description: "",
+      minutes: 15,
+      name: "kick ball",
+    },
+    {
+      id: 1,
+      description: "",
+      minutes: 15,
+      name: "slime making",
+    },
+  ];
+
   return (
     <div className="flex md:flex-row gap-5 z-0 max-w-[1440px] xl:mx-auto mx-2">
       <div className="flex-1 flex-row xl:pt-auto pt-28 sm:px-16 px-6">
-        <div className="flex">
+        <div className="flex gap-4">
           <div className="w-1/2 bg-slate-300 p-4">
             <form onSubmit={handleSubmit}>
               <div className="flex flex-col gap-4">
@@ -54,6 +76,12 @@ export default function ProgramPlanForm() {
                   fieldId={"groupCount"}
                   type="number"
                 />
+                <label className="block text-gray-700 text-sm font-bold -mb-2">
+                  Activities
+                </label>
+                {includedActivities.map((activity) => {
+                  return <div key={activity.id}>{activity.name}</div>;
+                })}
               </div>
 
               <button
@@ -64,7 +92,9 @@ export default function ProgramPlanForm() {
               </button>
             </form>
           </div>
-          <div className="w-1/2 p-4">This is where the examples will be</div>
+          <div className="w-1/2">
+            <ActivitiesPanel availableActivities={availableActivities} />
+          </div>
         </div>
       </div>
     </div>
