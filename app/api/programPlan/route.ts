@@ -5,9 +5,9 @@ export async function GET(Request: any) {
 }
 
 export async function POST(req: Request) {
-    console.log("Here")
     const requestData = await req.json();
-    console.log(requestData)
+    const { name } = requestData
+    console.log(name)
 
     await prisma?.programPlan.create({
         data: {

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import CustomButton from "./CustomButton";
+import CustomButton from "../CustomButton";
 import Link from "next/link";
 
 export default function Hero() {

@@ -23,7 +23,7 @@ export default function Calendar({ programPlans, programName }: Props) {
   });
 
   return (
-    <div className="flex flex-row align-middle justify-center mt-14 md:mx-28 m-4">
+    <div className="flex flex-row align-middle justify-center mt-2 md:mx-28 m-4">
       <Schedulely
         events={programs}
         additionalClassNames={["w-full"]}

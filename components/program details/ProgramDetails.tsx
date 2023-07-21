@@ -1,6 +1,9 @@
+"use client";
 import Link from "next/link";
 import Calendar from "./Calendar";
 import { ProgramPlan } from "@prisma/client";
+import { useRouter } from "next/navigation";
+import CustomButton from "../CustomButton";
 
 interface Props {
   programName: string;
@@ -13,6 +16,7 @@ export default function ProgramDetails({
   programDescription,
   programPlans,
 }: Props) {
+  const router = useRouter();
   return (
     <>
       <div className="xl:pt-auto pt-28 md:mx-28 mx-4">
@@ -38,13 +42,27 @@ export default function ProgramDetails({
             <div>
               {programPlans?.map((plan) => {
                 if (plan.isExample) {
-                  <>This is where a program plan display will go</>;
+                  <div key={plan.id}>
+                    This is where a program plan display will go
+                  </div>;
                 }
                 return <></>;
               })}
             </div>
           </div>
         </div>
+      </div>
+      <div className="flex flex-row align-middle justify-center">
+        <CustomButton
+          title={"Plan A Program"}
+          disabled={false}
+          containerStyles={
+            "bg-purple-400  hover:bg-purple-500 text-white rounded-full my-2 p-4"
+          }
+          handleClick={() => {
+            router.push("/plan");
+          }}
+        />
       </div>
       <Calendar programPlans={programPlans} programName={programName} />
     </>
