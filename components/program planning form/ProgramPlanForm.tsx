@@ -51,9 +51,9 @@ export default function ProgramPlanForm({ availableActivities }: Props) {
 
   return (
     <div className="flex md:flex-row gap-5 z-0 max-w-[1440px] xl:mx-auto mx-2">
-      <div className="flex-1 flex-row xl:pt-auto pt-28 sm:px-16 px-6">
-        <div className="flex gap-4">
-          <div className="w-1/2 bg-slate-300 p-4">
+      <div className="flex-1 xl:pt-auto pt-28 sm:px-16 px-6">
+        <div className="flex  md:flex-row flex-col gap-4">
+          <div className="md:w-1/2 w-full bg-slate-300 p-4">
             <form onSubmit={handleSubmit}>
               <div className="flex flex-col gap-4">
                 <CustomTextField
@@ -92,7 +92,7 @@ export default function ProgramPlanForm({ availableActivities }: Props) {
               </button>
             </form>
           </div>
-          <div className="w-1/2">
+          <div className="md:w-1/2 w-full">
             <ActivitiesPanel availableActivities={availableActivities} />
           </div>
         </div>

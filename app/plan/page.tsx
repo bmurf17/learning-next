@@ -3,7 +3,11 @@ import { prisma } from "../../lib/prisma";
 import { use } from "react";
 
 async function getActivities() {
-  return await prisma?.activity.findMany();
+  return await prisma?.activity.findMany({
+    include: {
+      supplies: true,
+    },
+  });
 }
 
 export default function Page() {

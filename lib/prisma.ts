@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient, Prisma } from '@prisma/client'
 
 declare global {
     var prisma: PrismaClient | undefined
@@ -9,3 +9,7 @@ export const prisma =
     new PrismaClient()
 
 if (process.env.NODE_ENV !== 'production') global.prisma = prisma
+
+export type ActivitiesWithSupplies = Prisma.ActivityGetPayload<{
+    include: { supplies: true };
+}>;
