@@ -4,12 +4,30 @@ import { Activity } from "@prisma/client";
 import CustomTextField from "../CustomTextField";
 import ActivitiesPanel from "./ActivitiesPanel";
 import { ActivitiesWithSupplies } from "@/lib/prisma";
+import { use } from "react";
 
 interface Props {
   availableActivities: ActivitiesWithSupplies[];
 }
 
+async function getPrograms() {
+  const res = await fetch("/api/program", {
+    method: "GET",
+  });
+
+  if (!res.ok) {
+    // This will activate the closest `error.js` Error Boundary
+    throw new Error("Failed to fetch data");
+  }
+
+  return res.json();
+}
+
 export default function ProgramPlanForm({ availableActivities }: Props) {
+  const programs = use(getPrograms());
+
+  console.log(programs);
+
   async function handleSubmit(event: any) {
     event.preventDefault();
 
@@ -80,9 +98,32 @@ export default function ProgramPlanForm({ availableActivities }: Props) {
                 <label className="block text-gray-700 text-sm font-bold -mb-2">
                   Activities
                 </label>
-                {includedActivities.map((activity) => {
-                  return <div key={activity.id}>{activity.name}</div>;
-                })}
+
+                <table className="w-full  text-gray-500 ">
+                  <thead className="text-xs text-gray-700 uppercase bg-gray-50 ">
+                    <tr>
+                      <th>Name</th>
+                      <th>Minutes</th>
+                      <th>Supplies</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {includedActivities.map((activity) => {
+                      return (
+                        <tr
+                          key={activity.id}
+                          className="bg-white border-b text-center"
+                        >
+                          <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                            {activity.name}
+                          </td>
+                          <td>{activity.minutes}</td>
+                          <td className="text-sky-400">supplies</td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
               </div>
 
               <button

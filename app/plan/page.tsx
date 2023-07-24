@@ -13,7 +13,7 @@ async function getActivities() {
 export default function Page() {
   const allActivities = use(getActivities());
   return (
-    <main>
+    <main className="mb-2">
       <ProgramPlanForm availableActivities={allActivities} />
     </main>
   );
