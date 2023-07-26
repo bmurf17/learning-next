@@ -28,7 +28,7 @@ export default function Calendar({ programPlans, programName }: Props) {
         events={programs}
         additionalClassNames={["w-full"]}
         actions={{
-          onEventClick: (event) => router.push("/"),
+          onEventClick: (event) => router.push(`/programPlan/${event.id}`),
           //onMoreEventsClick: (events) => router.push("/"),
         }}
       />

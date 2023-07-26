@@ -13,3 +13,9 @@ if (process.env.NODE_ENV !== 'production') global.prisma = prisma
 export type ActivitiesWithSupplies = Prisma.ActivityGetPayload<{
     include: { supplies: true };
 }>;
+
+export type ProgramPlanWithActivities = Prisma.ProgramPlanGetPayload<{
+    include: {
+        activities: true
+    };
+}>;
