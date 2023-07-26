@@ -4,29 +4,29 @@ import { Activity } from "@prisma/client";
 import CustomTextField from "../CustomTextField";
 import ActivitiesPanel from "./ActivitiesPanel";
 import { ActivitiesWithSupplies } from "@/lib/prisma";
-import { use } from "react";
+import { useEffect, useState } from "react";
 
 interface Props {
   availableActivities: ActivitiesWithSupplies[];
 }
 
-async function getPrograms() {
-  const res = await fetch("/api/program", {
-    method: "GET",
-  });
+export default function ProgramPlanForm({ availableActivities }: Props) {
+  const [programs, setPrograms] = useState([]);
 
-  if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error("Failed to fetch data");
+  async function getPrograms() {
+    const res = await fetch("/api/program", {
+      method: "GET",
+    });
+    if (!res.ok) {
+      // This will activate the closest `error.js` Error Boundary
+      throw new Error("Failed to fetch data");
+    }
+    setPrograms(await res.json());
   }
 
-  return res.json();
-}
-
-export default function ProgramPlanForm({ availableActivities }: Props) {
-  const programs = use(getPrograms());
-
-  console.log(programs);
+  useEffect(() => {
+    getPrograms();
+  }, []);
 
   async function handleSubmit(event: any) {
     event.preventDefault();
