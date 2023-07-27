@@ -11,6 +11,7 @@
     "postinstall": "prisma generate"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.16",
     "@heroicons/react": "^2.0.18",
     "@prisma/client": "^5.0.0",
     "@types/node": "20.3.1",
