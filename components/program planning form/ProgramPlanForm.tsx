@@ -5,6 +5,7 @@ import CustomTextField from "../CustomTextField";
 import ActivitiesPanel from "./ActivitiesPanel";
 import { ActivitiesWithSupplies } from "@/lib/prisma";
 import { useEffect, useState } from "react";
+import SuppliesHover from "./SuppliesHover";
 
 interface Props {
   availableActivities: ActivitiesWithSupplies[];
@@ -102,6 +103,7 @@ export default function ProgramPlanForm({ availableActivities }: Props) {
                 <table className="w-full  text-gray-500 ">
                   <thead className="text-xs text-gray-700 uppercase bg-gray-50 ">
                     <tr>
+                      <th></th>
                       <th>Name</th>
                       <th>Minutes</th>
                       <th>Supplies</th>
@@ -114,11 +116,27 @@ export default function ProgramPlanForm({ availableActivities }: Props) {
                           key={activity.id}
                           className="bg-white border-b text-center"
                         >
+                          <td className="p-2">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 24 24"
+                              fill="currentColor"
+                              className="w-6 h-6 text-red-500  hover:cursor-pointer"
+                            >
+                              <path
+                                fill-rule="evenodd"
+                                d="M3.75 12a.75.75 0 01.75-.75h15a.75.75 0 010 1.5h-15a.75.75 0 01-.75-.75z"
+                                clip-rule="evenodd"
+                              />
+                            </svg>
+                          </td>
                           <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                             {activity.name}
                           </td>
                           <td>{activity.minutes}</td>
-                          <td className="text-sky-400">supplies</td>
+                          <td className="text-sky-400">
+                            <SuppliesHover supplies={[]} />
+                          </td>
                         </tr>
                       );
                     })}
