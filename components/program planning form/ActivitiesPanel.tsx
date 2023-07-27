@@ -43,7 +43,7 @@ export default async function ActivitiesPanel({ availableActivities }: Props) {
                 </td>
                 <td>{activity.minutes}</td>
 
-                <td className="">
+                <td>
                   <SuppliesHover supplies={activity.supplies} />
                 </td>
               </tr>

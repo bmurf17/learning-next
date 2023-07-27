@@ -24,7 +24,7 @@ model ProgramPlan {
     isExample Boolean
     totalMinutes Int
     groupCount   Int
-    activities   ActivitiesForProgramPlans[]
+    activities   Activity[]
 
     @@index([programId])
 }
@@ -34,7 +34,7 @@ model Activity {
     name        String
     description String   
     minutes     Int
-    programPlans ActivitiesForProgramPlans[]
+    programPlans ProgramPlan[]
     supplies    Supply[]
 }
 
@@ -44,24 +44,3 @@ model Supply {
     quantity    Int
     activites   Activity[]
 }
-
-model ActivitiesForProgramPlans {
-    programPlan ProgramPlan @relation(fields: [programPlanId], references: [id])
-    programPlanId Int
-    activity    Activity @relation(fields: [activityId], references: [id])
-    activityId Int
-
-    @@id([activityId, programPlanId])
-    @@index([activityId])
-    @@index([programPlanId])
-}
-
-// model SuppliesForActivities {
-//     supply  Supply @relation(fields: [supplyId], references: [id])
-//     supplyId Int
-//     activity    Activity @relation(fields: [activityId], references: [id])
-//     activityId Int
-//     @@id([activityId, supplyId])
-//     @@index([activityId])
-//     @@index([supplyId])
-// }

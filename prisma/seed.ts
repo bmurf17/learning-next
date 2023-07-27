@@ -30,7 +30,7 @@ const programPlans = [
         date: new Date().toISOString(),
         isExample: false,
         totalMinutes: 60,
-        groupCount: 4
+        groupCount: 4,
     },
     {
         programId: 1,
@@ -62,34 +62,8 @@ const programPlans = [
     }
 ]
 
-const activitiesForProgramPlans = [
-    {
-        programPlanId: 1,
-        activityId: 1,
-    },
-    {
-        programPlanId: 2,
-        activityId: 2,
-    },
-    {
-        programPlanId: 3,
-        activityId: 3,
-    },
-    {
-        programPlanId: 4,
-        activityId: 4,
-    },
-    {
-        programPlanId: 5,
-        activityId: 5,
-    },
-]
-
 const load = async () => {
     try {
-        await prismaSeed.activitiesForProgramPlans.deleteMany();
-        console.log('Deleted records in activities for program table')
-
         await prismaSeed.supply.deleteMany();
         console.log('Deleted records in activity table')
 
@@ -119,80 +93,143 @@ const load = async () => {
         });
         console.log('Added programs data');
 
-        await prismaSeed.programPlan.createMany({
-            data: programPlans
-        })
-        console.log('Add ProgramPlans')
-
-        await prismaSeed.activity.create({
+        await prismaSeed.programPlan.create({
             data: {
-                name: "Slime making",
-                description: "Make some slime",
-                minutes: 15,
-                supplies: {
+                programId: 1,
+                date: new Date().toISOString(),
+                isExample: false,
+                totalMinutes: 60,
+                groupCount: 4,
+                activities: {
                     create: [
                         {
-                            name: "eggs",
-                            quantity: 4
+                            name: "Parachute",
+                            description: "Playing with the Parachute",
+                            minutes: 15,
+                            supplies: {
+                                create: [
+                                    {
+                                        name: "parachute",
+                                        quantity: 4
+                                    }
+                                ]
+                            }
                         }
                     ]
                 }
             }
         })
 
-        await prismaSeed.activity.create({
+
+        await prismaSeed.programPlan.create({
             data: {
-                name: "Lightning",
-                description: "basketball game",
-                minutes: 15,
-                supplies: {
+                programId: 1,
+                date: new Date().toISOString(),
+                isExample: false,
+                totalMinutes: 60,
+                groupCount: 4,
+                activities: {
                     create: [
                         {
-                            name: "basketballs",
-                            quantity: 4
+                            name: "Darts",
+                            description: "Add a little danger to the day",
+                            minutes: 15,
+                            supplies: {
+                                create: [
+                                    {
+                                        name: "darts",
+                                        quantity: 4
+                                    }
+                                ]
+                            }
                         }
                     ]
                 }
             }
         })
 
-        await prismaSeed.activity.create({
+        await prismaSeed.programPlan.create({
             data: {
-                name: "Ice Breaker",
-                description: "Group talking",
-                minutes: 15,
-                supplies: {
+                programId: 2,
+                date: new Date().toISOString(),
+                isExample: false,
+                totalMinutes: 60,
+                groupCount: 4,
+                activities: {
                     create: [
                         {
-                            name: "ice breakers",
-                            quantity: 4
+                            name: "Lightning",
+                            description: "basketball game",
+                            minutes: 15,
+                            supplies: {
+                                create: [
+                                    {
+                                        name: "basketballs",
+                                        quantity: 4
+                                    }
+                                ]
+                            }
                         }
                     ]
                 }
             }
         })
 
-        await prismaSeed.activity.create({
+        await prismaSeed.programPlan.create({
             data: {
-                name: "Parachute Time",
-                description: "In the gym",
-                minutes: 15,
-                supplies: {
+                programId: 3,
+                date: new Date().toISOString(),
+                isExample: false,
+                totalMinutes: 60,
+                groupCount: 4,
+                activities: {
                     create: [
                         {
-                            name: "parachutes",
-                            quantity: 4
+                            name: "Slime making",
+                            description: "Make some slime",
+                            minutes: 15,
+                            supplies: {
+                                create: [
+                                    {
+                                        name: "eggs",
+                                        quantity: 4
+                                    }
+                                ]
+                            }
                         }
                     ]
                 }
             }
         })
-        console.log('Activities Added')
 
-        await prismaSeed.activitiesForProgramPlans.createMany({
-            data: activitiesForProgramPlans
+        await prismaSeed.programPlan.create({
+            data: {
+                programId: 4,
+                date: new Date().toISOString(),
+                isExample: false,
+                totalMinutes: 60,
+                groupCount: 4,
+                activities: {
+                    create: [
+                        {
+                            name: "Ice Breaker",
+                            description: "Group talking",
+                            minutes: 15,
+                            supplies: {
+                                create: [
+                                    {
+                                        name: "ice breakers",
+                                        quantity: 4
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            }
         })
-        console.log('ActivitiesForProgramPlans added')
+
+        console.log('Added ProgramPlans')
     } catch (e) {
         console.error(e);
         process.exit(1);

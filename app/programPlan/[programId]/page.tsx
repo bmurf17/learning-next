@@ -10,11 +10,7 @@ async function getProgramPlanById(programId: string) {
       },
       include: {
         program: true,
-        activities: {
-          include: {
-            activity: true,
-          },
-        },
+        activities: true,
       },
     });
   }
@@ -22,19 +18,13 @@ async function getProgramPlanById(programId: string) {
 
 export default function Page({ params }: { params: { programId: string } }) {
   const programPlan = use(getProgramPlanById(params.programId));
-  var results = programPlan?.activities.filter(
-    (activ) => activ.programPlanId === +params.programId
-  );
-  var actualResults = results?.map((res) => {
-    return res.activity;
-  });
   return (
     <main className="">
       <ProgramPlan
         groupCount={programPlan?.groupCount || 0}
         programName={programPlan?.program.name || ""}
         programDate={programPlan?.date}
-        activities={actualResults || undefined}
+        activities={programPlan?.activities || undefined}
       />
     </main>
   );
