@@ -1,34 +1,21 @@
 "use client";
 
-import { Activity } from "@prisma/client";
+import { Activity, Program } from "@prisma/client";
 import CustomTextField from "../CustomTextField";
 import ActivitiesPanel from "./ActivitiesPanel";
 import { ActivitiesWithSupplies } from "@/lib/prisma";
-import { useEffect, useState } from "react";
 import SuppliesHover from "./SuppliesHover";
+import ProgramsDropdown from "./ProgramsDropdown";
 
 interface Props {
   availableActivities: ActivitiesWithSupplies[];
+  programs: Program[];
 }
 
-export default function ProgramPlanForm({ availableActivities }: Props) {
-  const [programs, setPrograms] = useState([]);
-
-  async function getPrograms() {
-    const res = await fetch("/api/program", {
-      method: "GET",
-    });
-    if (!res.ok) {
-      // This will activate the closest `error.js` Error Boundary
-      throw new Error("Failed to fetch data");
-    }
-    setPrograms(await res.json());
-  }
-
-  useEffect(() => {
-    getPrograms();
-  }, []);
-
+export default function ProgramPlanForm({
+  availableActivities,
+  programs,
+}: Props) {
   async function handleSubmit(event: any) {
     event.preventDefault();
 
@@ -76,11 +63,7 @@ export default function ProgramPlanForm({ availableActivities }: Props) {
           <div className="md:w-1/2 w-full bg-slate-300 p-4">
             <form onSubmit={handleSubmit}>
               <div className="flex flex-col gap-4">
-                <CustomTextField
-                  fieldName={"Program Name"}
-                  fieldId={"programName"}
-                  type={"text"}
-                />
+                <ProgramsDropdown programs={programs} />
                 <CustomTextField
                   fieldName={"Date"}
                   fieldId={"date"}
@@ -124,7 +107,7 @@ export default function ProgramPlanForm({ availableActivities }: Props) {
                               className="w-6 h-6 text-red-500  hover:cursor-pointer"
                             >
                               <path
-                                fill-rule="evenodd"
+                                fillRule="evenodd"
                                 d="M3.75 12a.75.75 0 01.75-.75h15a.75.75 0 010 1.5h-15a.75.75 0 01-.75-.75z"
                                 clip-rule="evenodd"
                               />
