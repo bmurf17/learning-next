@@ -1,4 +1,5 @@
 import { ActivitiesWithSupplies } from "@/lib/prisma";
+import SuppliesHover from "./SuppliesHover";
 
 interface Props {
   availableActivities: ActivitiesWithSupplies[];
@@ -41,7 +42,10 @@ export default async function ActivitiesPanel({ availableActivities }: Props) {
                   {activity.name}
                 </td>
                 <td>{activity.minutes}</td>
-                <td className="text-sky-400">supplies</td>
+
+                <td className="">
+                  <SuppliesHover supplies={activity.supplies} />
+                </td>
               </tr>
             );
           })}
