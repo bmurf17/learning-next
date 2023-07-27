@@ -62,61 +62,6 @@ const programPlans = [
     }
 ]
 
-const activities = [
-    {
-        name: "Slime making",
-        description: "Make some slime",
-        minutes: 15
-    },
-    {
-        name: "Lightning",
-        description: "basketball game",
-        minutes: 15
-    },
-    {
-        name: "Kick Ball",
-        description: "Kick ball",
-        minutes: 15
-    },
-    {
-        name: "Ice Breaker",
-        description: "Group talking",
-        minutes: 15
-    },
-    {
-        name: "Parachute Time",
-        description: "In the gym",
-        minutes: 15
-    }
-]
-
-const supplies = [
-    {
-        name: "eggs",
-        quantity: 4
-    },
-    {
-        name: "honey mustard",
-        quantity: 4
-    },
-    {
-        name: "popcorn ",
-        quantity: 4
-    },
-    {
-        name: "socks",
-        quantity: 4
-    },
-    {
-        name: "glue",
-        quantity: 4
-    },
-    {
-        name: "basketball",
-        quantity: 4
-    }
-]
-
 const activitiesForProgramPlans = [
     {
         programPlanId: 1,
@@ -140,40 +85,10 @@ const activitiesForProgramPlans = [
     },
 ]
 
-const suppliesForActivities = [
-    {
-        supplyId: 1,
-        activityId: 1,
-    },
-    {
-        supplyId: 2,
-        activityId: 2,
-    },
-    {
-        supplyId: 3,
-        activityId: 3,
-    },
-    {
-        supplyId: 4,
-        activityId: 4,
-    },
-    {
-        supplyId: 5,
-        activityId: 5,
-    },
-    {
-        supplyId: 6,
-        activityId: 5,
-    }
-]
-
 const load = async () => {
     try {
         await prismaSeed.activitiesForProgramPlans.deleteMany();
         console.log('Deleted records in activities for program table')
-
-        await prismaSeed.suppliesForActivities.deleteMany();
-        console.log('Deleted records in SuppliesForActivities table')
 
         await prismaSeed.supply.deleteMany();
         console.log('Deleted records in activity table')
@@ -209,27 +124,75 @@ const load = async () => {
         })
         console.log('Add ProgramPlans')
 
-        await prismaSeed.activity.createMany({
-            data: activities
+        await prismaSeed.activity.create({
+            data: {
+                name: "Slime making",
+                description: "Make some slime",
+                minutes: 15,
+                supplies: {
+                    create: [
+                        {
+                            name: "eggs",
+                            quantity: 4
+                        }
+                    ]
+                }
+            }
+        })
+
+        await prismaSeed.activity.create({
+            data: {
+                name: "Lightning",
+                description: "basketball game",
+                minutes: 15,
+                supplies: {
+                    create: [
+                        {
+                            name: "basketballs",
+                            quantity: 4
+                        }
+                    ]
+                }
+            }
+        })
+
+        await prismaSeed.activity.create({
+            data: {
+                name: "Ice Breaker",
+                description: "Group talking",
+                minutes: 15,
+                supplies: {
+                    create: [
+                        {
+                            name: "ice breakers",
+                            quantity: 4
+                        }
+                    ]
+                }
+            }
+        })
+
+        await prismaSeed.activity.create({
+            data: {
+                name: "Parachute Time",
+                description: "In the gym",
+                minutes: 15,
+                supplies: {
+                    create: [
+                        {
+                            name: "parachutes",
+                            quantity: 4
+                        }
+                    ]
+                }
+            }
         })
         console.log('Activities Added')
-
-        await prismaSeed.supply.createMany({
-            data: supplies
-        })
-        console.log('Supplies Added')
 
         await prismaSeed.activitiesForProgramPlans.createMany({
             data: activitiesForProgramPlans
         })
         console.log('ActivitiesForProgramPlans added')
-
-        await prismaSeed.suppliesForActivities.createMany({
-            data: suppliesForActivities
-        })
-        console.log('SuppliesForActivities added')
-
-
     } catch (e) {
         console.error(e);
         process.exit(1);

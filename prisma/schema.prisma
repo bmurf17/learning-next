@@ -35,14 +35,14 @@ model Activity {
     description String   
     minutes     Int
     programPlans ActivitiesForProgramPlans[]
-    supplies    SuppliesForActivities[]
+    supplies    Supply[]
 }
 
 model Supply {
     id          Int         @id @default(autoincrement())
     name        String
     quantity    Int
-    activites   SuppliesForActivities[]
+    activites   Activity[]
 }
 
 model ActivitiesForProgramPlans {
@@ -56,12 +56,12 @@ model ActivitiesForProgramPlans {
     @@index([programPlanId])
 }
 
-model SuppliesForActivities {
-    supply  Supply @relation(fields: [supplyId], references: [id])
-    supplyId Int
-    activity    Activity @relation(fields: [activityId], references: [id])
-    activityId Int
-    @@id([activityId, supplyId])
-    @@index([activityId])
-    @@index([supplyId])
-}
+// model SuppliesForActivities {
+//     supply  Supply @relation(fields: [supplyId], references: [id])
+//     supplyId Int
+//     activity    Activity @relation(fields: [activityId], references: [id])
+//     activityId Int
+//     @@id([activityId, supplyId])
+//     @@index([activityId])
+//     @@index([supplyId])
+// }
