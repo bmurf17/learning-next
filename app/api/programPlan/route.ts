@@ -16,7 +16,10 @@ export async function POST(req: Request) {
             totalMinutes: totalMinutes,
             activities: {
                 create: {
-                    activityId: 1
+                    description: "test",
+                    minutes: 60,
+                    name: "test",
+
                 }
             },
             programId: 1,
