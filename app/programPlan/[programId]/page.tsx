@@ -18,7 +18,6 @@ async function getProgramPlanById(programId: string) {
 
 export default function Page({ params }: { params: { programId: string } }) {
   const programPlan = use(getProgramPlanById(params.programId));
-  console.log("Here");
   return (
     <main className="">
       <ProgramPlan

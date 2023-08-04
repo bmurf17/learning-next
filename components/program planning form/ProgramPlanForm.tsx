@@ -32,6 +32,14 @@ export default function ProgramPlanForm({
   });
 
   const [selected, setSelected] = useState(newArray[0]);
+  const [includedActivities, setIncludedActivities] = useState<Activity[]>([]);
+
+  function addToActivities(activity: Activity) {
+    setIncludedActivities((includedActivities) => [
+      ...includedActivities,
+      activity,
+    ]);
+  }
 
   async function handleSubmit(event: any) {
     event.preventDefault();
@@ -41,6 +49,7 @@ export default function ProgramPlanForm({
       date: String(event.target.date.value),
       totalMinutes: +event.target.totalMinutes.value,
       groupCount: +event.target.groupCount.value,
+      activities: includedActivities,
     };
 
     const response = await fetch("/api/programPlan", {
@@ -57,8 +66,6 @@ export default function ProgramPlanForm({
       console.log("Sad");
     }
   }
-
-  const includedActivities: Activity[] = [];
 
   return (
     <div className="flex md:flex-row gap-5 z-0 max-w-[1440px] xl:mx-auto mx-2">
@@ -145,7 +152,10 @@ export default function ProgramPlanForm({
             </form>
           </div>
           <div className="md:w-1/2 w-full">
-            <ActivitiesPanel availableActivities={availableActivities} />
+            <ActivitiesPanel
+              availableActivities={availableActivities}
+              addToActivities={addToActivities}
+            />
           </div>
         </div>
       </div>

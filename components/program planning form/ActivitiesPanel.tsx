@@ -2,12 +2,17 @@
 
 import { ActivitiesWithSupplies } from "@/lib/prisma";
 import SuppliesHover from "./SuppliesHover";
+import { Activity } from "@prisma/client";
 
 interface Props {
   availableActivities: ActivitiesWithSupplies[];
+  addToActivities(activity: Activity): void;
 }
 
-export default function ActivitiesPanel({ availableActivities }: Props) {
+export default function ActivitiesPanel({
+  availableActivities,
+  addToActivities,
+}: Props) {
   return (
     <div className="flex flex-col bg-slate-300 p-4">
       <div className='"block text-gray-700 text-sm font-bold'>Activities </div>
@@ -32,6 +37,9 @@ export default function ActivitiesPanel({ availableActivities }: Props) {
                     strokeWidth={1.5}
                     stroke="currentColor"
                     className="w-6 h-6 cursor-pointer text-green-600"
+                    onClick={() => {
+                      addToActivities(activity);
+                    }}
                   >
                     <path
                       strokeLinecap="round"

@@ -1,3 +1,4 @@
+import { Activity } from '@prisma/client';
 
 
 export async function GET(Request: any) {
@@ -7,9 +8,13 @@ export async function GET(Request: any) {
 export async function POST(req: Request) {
     const requestData = await req.json();
 
-    const { program, date, totalMinutes, groupCount } = requestData
+    const { program, date, totalMinutes, groupCount, activities } = requestData
 
-    console.log(program.id)
+    const activityIds = activities.map((activ: Activity) => {
+        return {
+            id: activ.id
+        }
+    })
 
     await prisma?.programPlan.create({
         data: {
@@ -18,11 +23,7 @@ export async function POST(req: Request) {
             groupCount: groupCount,
             totalMinutes: totalMinutes,
             activities: {
-                create: {
-                    description: "test",
-                    minutes: 60,
-                    name: "test",
-                }
+                connect: activityIds
             },
             programId: program.id,
 

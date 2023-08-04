@@ -25,13 +25,15 @@ export default function ProgramPlan({
         <h2 className="2xl:text-[42px] sm:text-[34px] text-[20px] font-light">
           {programDate?.toDateString()}
         </h2>
-        <div className="bg-slate-300 p-4 shadow-lg ">
+        <div className="bg-slate-300 p-4 shadow-lg">
           <h3 className="text-lg font-medium text-center m-1"> Activities</h3>
-          {activities?.map((activity) => {
-            return (
-              <ProgramPlanActivity key={activity.id} activity={activity} />
-            );
-          })}
+          <div className="flex flex-col gap-4">
+            {activities?.map((activity) => {
+              return (
+                <ProgramPlanActivity key={activity.id} activity={activity} />
+              );
+            })}
+          </div>
         </div>
         <div>
           <CustomButton
