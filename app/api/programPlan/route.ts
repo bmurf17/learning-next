@@ -10,15 +10,17 @@ export async function POST(req: Request) {
 
     const { program, date, totalMinutes, groupCount, activities } = requestData
 
-    const activityIds = activities.map((activ: Activity) => {
+    const activityIds = activities.map((act: Activity) => {
         return {
-            id: activ.id
+            id: act.id
         }
     })
+    var dateOffset = new Date(date);
+    dateOffset.setDate(dateOffset.getDate() + 1)
 
     await prisma?.programPlan.create({
         data: {
-            date: new Date(date).toISOString(),
+            date: dateOffset.toISOString(),
             isExample: false,
             groupCount: groupCount,
             totalMinutes: totalMinutes,
