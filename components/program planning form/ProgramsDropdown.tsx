@@ -1,29 +1,46 @@
 "use client";
 
-import { Fragment, useState } from "react";
+import { Dispatch, Fragment, SetStateAction, useState } from "react";
 import { Listbox, Menu, Transition } from "@headlessui/react";
-import {
-  CheckIcon,
-  ChevronDownIcon,
-  ChevronUpDownIcon,
-} from "@heroicons/react/20/solid";
+import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import { Program } from "@prisma/client";
+import { GetResult } from "@prisma/client/runtime/library";
 
 interface Props {
   programs: Program[];
 }
 
+interface DropDownProgram {
+  id: number;
+  name: string;
+}
+
 export default function ProgramsDropdown({ programs }: Props) {
-  const [selected, setSelected] = useState(programs[0]);
+  const newArray = programs.map((p) => {
+    const test: DropDownProgram = {
+      id: p.id,
+      name: p.name,
+    };
+    return test;
+  });
+
+  const [selected, setSelected] = useState(newArray[0]);
+
+  const handleSelect = (person: any) => {
+    setSelected(person);
+  };
 
   return (
     <div className="">
-      <label className="block text-gray-700 text-sm font-bold mb-2">
-        Program
-      </label>
-      <Listbox value={selected} onChange={setSelected}>
+      <label className="block text-gray-700 text-sm font-bold">Program</label>
+      <Listbox
+        value={selected}
+        onChange={(e) => {
+          handleSelect(e);
+        }}
+      >
         <div className="relative mt-1">
-          <Listbox.Button className="relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
+          <Listbox.Button className="relative w-full cursor-default rounded bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
             <span className="block truncate">{selected.name}</span>
             <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
               <ChevronUpDownIcon
@@ -39,15 +56,17 @@ export default function ProgramsDropdown({ programs }: Props) {
             leaveTo="opacity-0"
           >
             <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-              {programs.map((program, programIdx) => (
+              {programs.map((person) => (
+                /* Use the `active` state to conditionally style the active option. */
+                /* Use the `selected` state to conditionally style the selected option. */
                 <Listbox.Option
-                  key={programIdx}
+                  key={person.id}
                   className={({ active }) =>
                     `relative cursor-default select-none py-2 pl-10 pr-4 ${
                       active ? "bg-amber-100 text-amber-900" : "text-gray-900"
                     }`
                   }
-                  value={program}
+                  value={person}
                 >
                   {({ selected }) => (
                     <>
@@ -56,7 +75,7 @@ export default function ProgramsDropdown({ programs }: Props) {
                           selected ? "font-medium" : "font-normal"
                         }`}
                       >
-                        {program.name}
+                        {person.name}
                       </span>
                       {selected ? (
                         <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-amber-600">

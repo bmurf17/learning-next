@@ -1,3 +1,5 @@
+"use client";
+
 import { ActivitiesWithSupplies } from "@/lib/prisma";
 import SuppliesHover from "./SuppliesHover";
 

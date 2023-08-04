@@ -6,7 +6,7 @@ export async function GET(Request: any) {
 
 export async function POST(req: Request) {
     const requestData = await req.json();
-    const { programName, date, totalMinutes, groupCount } = requestData
+    const { program, date, totalMinutes, groupCount } = requestData
 
     await prisma?.programPlan.create({
         data: {
@@ -19,10 +19,9 @@ export async function POST(req: Request) {
                     description: "test",
                     minutes: 60,
                     name: "test",
-
                 }
             },
-            programId: 1,
+            programId: program.id,
 
         }
     })

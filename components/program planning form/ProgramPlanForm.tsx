@@ -1,11 +1,12 @@
 "use client";
 
+import { ActivitiesWithSupplies } from "@/lib/prisma";
 import { Activity, Program } from "@prisma/client";
+
 import CustomTextField from "../CustomTextField";
 import ActivitiesPanel from "./ActivitiesPanel";
-import { ActivitiesWithSupplies } from "@/lib/prisma";
-import SuppliesHover from "./SuppliesHover";
 import ProgramsDropdown from "./ProgramsDropdown";
+import SuppliesHover from "./SuppliesHover";
 
 interface Props {
   availableActivities: ActivitiesWithSupplies[];
@@ -20,7 +21,7 @@ export default function ProgramPlanForm({
     event.preventDefault();
 
     const data = {
-      programName: String(event.target.programName.value),
+      //program: selected,
       date: String(event.target.date.value),
       totalMinutes: +event.target.totalMinutes.value,
       groupCount: +event.target.groupCount.value,
@@ -61,8 +62,13 @@ export default function ProgramPlanForm({
       <div className="flex-1 xl:pt-auto pt-28 sm:px-16 px-6">
         <div className="flex  md:flex-row flex-col gap-4">
           <div className="md:w-1/2 w-full bg-slate-300 p-4">
-            <form onSubmit={handleSubmit}>
+            <form
+              onSubmit={(e) => {
+                handleSubmit(e);
+              }}
+            >
               <div className="flex flex-col gap-4">
+                <div className="fixed top-16 w-72"></div>
                 <ProgramsDropdown programs={programs} />
                 <CustomTextField
                   fieldName={"Date"}
@@ -106,11 +112,7 @@ export default function ProgramPlanForm({
                               fill="currentColor"
                               className="w-6 h-6 text-red-500  hover:cursor-pointer"
                             >
-                              <path
-                                fillRule="evenodd"
-                                d="M3.75 12a.75.75 0 01.75-.75h15a.75.75 0 010 1.5h-15a.75.75 0 01-.75-.75z"
-                                clip-rule="evenodd"
-                              />
+                              <path d="M3.75 12a.75.75 0 01.75-.75h15a.75.75 0 010 1.5h-15a.75.75 0 01-.75-.75z" />
                             </svg>
                           </td>
                           <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
