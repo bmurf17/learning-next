@@ -7,10 +7,10 @@ interface Props {
   availableActivities: ActivitiesWithSupplies[];
 }
 
-export default async function ActivitiesPanel({ availableActivities }: Props) {
+export default function ActivitiesPanel({ availableActivities }: Props) {
   return (
     <div className="flex flex-col bg-slate-300 p-4">
-      <div className='"block text-gray-700 text-sm font-bold'>Activities</div>
+      <div className='"block text-gray-700 text-sm font-bold'>Activities </div>
       <table className="w-full  text-gray-500 ">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 ">
           <tr>

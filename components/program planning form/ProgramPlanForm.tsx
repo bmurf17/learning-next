@@ -7,21 +7,37 @@ import CustomTextField from "../CustomTextField";
 import ActivitiesPanel from "./ActivitiesPanel";
 import ProgramsDropdown from "./ProgramsDropdown";
 import SuppliesHover from "./SuppliesHover";
+import { useState } from "react";
 
 interface Props {
   availableActivities: ActivitiesWithSupplies[];
   programs: Program[];
 }
 
+interface DropDownProgram {
+  id: number;
+  name: string;
+}
+
 export default function ProgramPlanForm({
   availableActivities,
   programs,
 }: Props) {
+  const newArray = programs.map((p) => {
+    const test: DropDownProgram = {
+      id: p.id,
+      name: p.name,
+    };
+    return test;
+  });
+
+  const [selected, setSelected] = useState(newArray[0]);
+
   async function handleSubmit(event: any) {
     event.preventDefault();
 
     const data = {
-      //program: selected,
+      program: selected,
       date: String(event.target.date.value),
       totalMinutes: +event.target.totalMinutes.value,
       groupCount: +event.target.groupCount.value,
@@ -42,20 +58,7 @@ export default function ProgramPlanForm({
     }
   }
 
-  const includedActivities: Activity[] = [
-    {
-      id: 0,
-      description: "",
-      minutes: 15,
-      name: "kick ball",
-    },
-    {
-      id: 1,
-      description: "",
-      minutes: 15,
-      name: "slime making",
-    },
-  ];
+  const includedActivities: Activity[] = [];
 
   return (
     <div className="flex md:flex-row gap-5 z-0 max-w-[1440px] xl:mx-auto mx-2">
@@ -69,7 +72,11 @@ export default function ProgramPlanForm({
             >
               <div className="flex flex-col gap-4">
                 <div className="fixed top-16 w-72"></div>
-                <ProgramsDropdown programs={programs} />
+                <ProgramsDropdown
+                  programs={programs}
+                  selected={selected}
+                  setSelected={setSelected}
+                />
                 <CustomTextField
                   fieldName={"Date"}
                   fieldId={"date"}

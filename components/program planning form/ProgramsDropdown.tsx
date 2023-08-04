@@ -8,6 +8,8 @@ import { GetResult } from "@prisma/client/runtime/library";
 
 interface Props {
   programs: Program[];
+  selected: DropDownProgram;
+  setSelected: Dispatch<SetStateAction<DropDownProgram>>;
 }
 
 interface DropDownProgram {
@@ -15,24 +17,18 @@ interface DropDownProgram {
   name: string;
 }
 
-export default function ProgramsDropdown({ programs }: Props) {
-  const newArray = programs.map((p) => {
-    const test: DropDownProgram = {
-      id: p.id,
-      name: p.name,
-    };
-    return test;
-  });
-
-  const [selected, setSelected] = useState(newArray[0]);
-
+export default function ProgramsDropdown({
+  programs,
+  selected,
+  setSelected,
+}: Props) {
   const handleSelect = (person: any) => {
     setSelected(person);
   };
 
   return (
     <div className="">
-      <label className="block text-gray-700 text-sm font-bold">Program</label>
+      <label className="block text-gray-700 text-sm font-bold">Program </label>
       <Listbox
         value={selected}
         onChange={(e) => {
