@@ -12,26 +12,31 @@ interface Props {
 export default function Calendar({ programPlans, programName }: Props) {
   const router = useRouter();
 
-  const programs: CalendarEvent[] = programPlans.map((plan) => {
+  const programs: CalendarEvent[] = programPlans?.map((plan) => {
+    console.log(plan);
     return {
       color: "#a855f7",
-      end: plan.date.toISOString(),
+      end: plan?.date + "",
       id: plan.id + "",
-      start: plan.date.toISOString(),
+      start: plan?.date + "",
       summary: programName,
     };
   });
 
   return (
     <div className="flex flex-row align-middle justify-center mt-2 md:mx-28 m-4">
-      <Schedulely
-        events={programs}
-        additionalClassNames={["w-full"]}
-        actions={{
-          onEventClick: (event) => router.push(`/programPlan/${event.id}`),
-          //onMoreEventsClick: (events) => router.push("/"),
-        }}
-      />
+      {programs ? (
+        <Schedulely
+          events={programs}
+          additionalClassNames={["w-full"]}
+          actions={{
+            onEventClick: (event) => router.push(`/programPlan/${event.id}`),
+            //onMoreEventsClick: (events) => router.push("/"),
+          }}
+        />
+      ) : (
+        <></>
+      )}
     </div>
   );
 }

@@ -19,3 +19,9 @@ export type ProgramPlanWithActivities = Prisma.ProgramPlanGetPayload<{
         activities: true
     };
 }>;
+
+export type ProgramWithProgramPlans = Prisma.ProgramGetPayload<{
+    include: {
+        programPlans: true
+    }
+}>
