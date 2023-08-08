@@ -13,7 +13,6 @@ export default function Calendar({ programPlans, programName }: Props) {
   const router = useRouter();
 
   const programs: CalendarEvent[] = programPlans?.map((plan) => {
-    console.log(plan);
     return {
       color: "#a855f7",
       end: plan?.date + "",

@@ -9,15 +9,9 @@ import { ProgramWithProgramPlans } from "@/lib/prisma";
 
 interface Props {
   programName: string;
-  programDescription: string;
-  programPlans: ProgramPlan[];
 }
 
-export default function ProgramDetails({
-  programName,
-  programDescription,
-  programPlans,
-}: Props) {
+export default function ProgramDetails({ programName }: Props) {
   const router = useRouter();
 
   const [data, setData] = useState<ProgramWithProgramPlans | null>(null);
@@ -31,8 +25,6 @@ export default function ProgramDetails({
         setLoading(false);
       });
   }, [programName]);
-
-  console.log(data);
 
   return (
     <>
@@ -61,7 +53,7 @@ export default function ProgramDetails({
               <div className="text-[27px] text-black-100 font-light mt-5 text-center">
                 &lt; Examples &gt;
                 <div>
-                  {programPlans?.map((plan) => {
+                  {data?.programPlans?.map((plan) => {
                     if (plan.isExample) {
                       <div key={plan.id}>
                         This is where a program plan display will go

@@ -2,6 +2,7 @@ import { ProgramPlanWithActivities } from "@/lib/prisma";
 import { Activity } from "@prisma/client";
 import ProgramPlanActivity from "./ProgramPlanActivity";
 import CustomButton from "../CustomButton";
+import Link from "next/link";
 
 interface Props {
   programName: string;
@@ -19,6 +20,9 @@ export default function ProgramPlan({
   return (
     <div className="flex md:flex-row flex-col gap-5 z-0 max-w-[1440px] xl:mx-auto mx-2">
       <div className="flex-1 xl:pt-auto pt-28 sm:px-16 px-6">
+        <Link href={`/program/${programName}`}>
+          <h3 className="text-[20px] cursor-pointer">&lt; Back</h3>
+        </Link>
         <h1 className="2xl:text-[72px] sm:text-[64px] text-[50px] font-extrabold">
           {programName}
         </h1>
