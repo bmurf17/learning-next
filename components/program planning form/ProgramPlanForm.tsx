@@ -31,9 +31,9 @@ export default function ProgramPlanForm({
     };
     return test;
   });
-
   const [selected, setSelected] = useState(newArray[0]);
   const [includedActivities, setIncludedActivities] = useState<Activity[]>([]);
+  const [buttonDisabled, setButtonDisabled] = useState(false);
   const router = useRouter();
 
   function addToActivities(activity: Activity) {
@@ -45,6 +45,7 @@ export default function ProgramPlanForm({
 
   async function handleSubmit(event: any) {
     event.preventDefault();
+    setButtonDisabled(true);
 
     const data = {
       program: selected,
@@ -125,7 +126,17 @@ export default function ProgramPlanForm({
                           key={activity.id}
                           className="bg-white border-b text-center"
                         >
-                          <td className="p-2">
+                          <td
+                            className="p-2"
+                            onClick={() => {
+                              var array = [...includedActivities]; // make a separate copy of the array
+                              var index = array.indexOf(activity);
+                              if (index !== -1) {
+                                array.splice(index, 1);
+                                setIncludedActivities(array);
+                              }
+                            }}
+                          >
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               viewBox="0 0 24 24"
@@ -152,6 +163,7 @@ export default function ProgramPlanForm({
               <button
                 className="bg-purple-400  hover:bg-purple-500 text-white rounded-full mt-4 p-2"
                 type="submit"
+                disabled={buttonDisabled}
               >
                 Submit Program
               </button>
