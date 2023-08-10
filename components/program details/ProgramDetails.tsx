@@ -1,11 +1,10 @@
 "use client";
-import Link from "next/link";
-import Calendar from "./Calendar";
-import { ProgramPlan } from "@prisma/client";
-import { useRouter } from "next/navigation";
-import CustomButton from "../CustomButton";
-import { useEffect, useState } from "react";
 import { ProgramWithProgramPlans } from "@/lib/prisma";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import CustomButton from "../CustomButton";
+import Calendar from "./Calendar";
 
 interface Props {
   programName: string;

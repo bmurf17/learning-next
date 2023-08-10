@@ -8,6 +8,7 @@ import ActivitiesPanel from "./ActivitiesPanel";
 import ProgramsDropdown from "./ProgramsDropdown";
 import SuppliesHover from "./SuppliesHover";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 interface Props {
   availableActivities: ActivitiesWithSupplies[];
@@ -33,6 +34,7 @@ export default function ProgramPlanForm({
 
   const [selected, setSelected] = useState(newArray[0]);
   const [includedActivities, setIncludedActivities] = useState<Activity[]>([]);
+  const router = useRouter();
 
   function addToActivities(activity: Activity) {
     setIncludedActivities((includedActivities) => [
@@ -60,11 +62,15 @@ export default function ProgramPlanForm({
       body: JSON.stringify(data),
     });
 
+    const programPlan = await response.json();
+
     if (response.ok) {
       console.log("Happy");
     } else {
       console.log("Sad");
     }
+
+    router.push(`/programPlan/${programPlan.id}`);
   }
 
   return (

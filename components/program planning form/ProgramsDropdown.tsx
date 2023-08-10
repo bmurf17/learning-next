@@ -1,10 +1,9 @@
 "use client";
 
-import { Dispatch, Fragment, SetStateAction, useState } from "react";
-import { Listbox, Menu, Transition } from "@headlessui/react";
+import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import { Program } from "@prisma/client";
-import { GetResult } from "@prisma/client/runtime/library";
+import { Dispatch, Fragment, SetStateAction } from "react";
 
 interface Props {
   programs: Program[];
@@ -53,8 +52,6 @@ export default function ProgramsDropdown({
           >
             <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
               {programs.map((person) => (
-                /* Use the `active` state to conditionally style the active option. */
-                /* Use the `selected` state to conditionally style the selected option. */
                 <Listbox.Option
                   key={person.id}
                   className={({ active }) =>

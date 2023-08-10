@@ -1,4 +1,5 @@
 import { Activity } from '@prisma/client';
+import { NextResponse } from 'next/server';
 
 
 export async function GET(Request: any) {
@@ -18,7 +19,7 @@ export async function POST(req: Request) {
     var dateOffset = new Date(date);
     dateOffset.setDate(dateOffset.getDate() + 1)
 
-    await prisma?.programPlan.create({
+    var data = await prisma?.programPlan.create({
         data: {
             date: dateOffset.toISOString(),
             isExample: false,
@@ -32,5 +33,5 @@ export async function POST(req: Request) {
         }
     })
 
-    return new Response("success")
+    return NextResponse.json(data)
 }
