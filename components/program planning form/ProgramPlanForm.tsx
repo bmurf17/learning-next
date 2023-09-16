@@ -3,7 +3,7 @@
 import { ActivitiesWithSupplies } from "@/lib/prisma";
 import { Activity, Program } from "@prisma/client";
 
-import CustomTextField from "../CustomTextField";
+import CustomTextField from "../shared/CustomTextField";
 import ActivitiesPanel from "./ActivitiesPanel";
 import ProgramsDropdown from "./ProgramsDropdown";
 import SuppliesHover from "./SuppliesHover";
@@ -161,7 +161,7 @@ export default function ProgramPlanForm({
               </div>
 
               <button
-                className="bg-purple-400  hover:bg-purple-500 text-white rounded-full mt-4 p-2"
+                className="bg-purple-400  hover:bg-purple-500 text-white rounded-full mt-4 p-2 cursor-pointer"
                 type="submit"
                 disabled={buttonDisabled}
               >

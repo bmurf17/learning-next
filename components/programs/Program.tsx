@@ -1,4 +1,4 @@
-import CustomCard from "../CustomCard";
+import CustomCard from "../shared/CustomCard";
 import Link from "next/link";
 import { Program as ProgramType } from "@prisma/client";
 

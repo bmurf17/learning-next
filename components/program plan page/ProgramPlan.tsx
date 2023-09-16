@@ -1,7 +1,7 @@
 import { ProgramPlanWithActivities } from "@/lib/prisma";
 import { Activity } from "@prisma/client";
 import ProgramPlanActivity from "./ProgramPlanActivity";
-import CustomButton from "../CustomButton";
+import CustomButton from "../shared/CustomButton";
 import Link from "next/link";
 
 interface Props {

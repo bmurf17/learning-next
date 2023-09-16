@@ -3,7 +3,7 @@ import { ProgramWithProgramPlans } from "@/lib/prisma";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import CustomButton from "../CustomButton";
+import CustomButton from "../shared/CustomButton";
 import Calendar from "./Calendar";
 
 interface Props {
